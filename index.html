@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calulator">
+        <div class="calculate">
+          <input type="text" id="display" disabled placeholder="0"/>
+          <div class="buttons">
+            <button onclick="clearDisplay()"  class="clear">C</button>
+            <button onclick="backspace()" class="backspace">CE</button>
+            <button onclick="calculate()" class="equal" id="calculateBtn">=</button>
+            <button onclick="appendValue('+')" class="operator">+</button>
+            <button onclick="appendValue('7')" id="keys">7</button>
+            <button onclick="appendValue('8')" id="keys">8</button>
+            <button onclick="appendValue('9')" id="keys">9</button>
+            <button onclick="appendValue('/')" class="operator">/</button>
+            <button onclick="appendValue('4')" id="keys">4</button>
+            <button onclick="appendValue('5')" id="keys">5</button>
+            <button onclick="appendValue('6')" id="keys">6</button>
+            <button onclick="appendValue('*')" class="operator">*</button>
+            <button onclick="appendValue('1')" id="keys">1</button>
+            <button onclick="appendValue('2')" id="keys">2</button>
+            <button onclick="appendValue('3')" id="keys">3</button>
+            <button onclick="appendValue('-')" class="operator">-</button>
+            <button onclick="appendValue('-')" class=""></button>
+            <button onclick="appendValue('0')" id="keys">0</button>
+            <button onclick="appendValue('.')" id="keys">.</button>
+            <button onclick="appendValue('%')" class="operator">%</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let displayValue = '';
+
+function updateDisplay() {
+  document.getElementById('display').value = displayValue;
+}
+
+function appendValue(value) {
+  displayValue += value;
+  updateDisplay();
+}
+
+function clearDisplay() {
+  displayValue = '';
+  updateDisplay();
+}
+
+function backspace() {
+  displayValue = displayValue.slice(0, -1);
+  updateDisplay();
+}
+
+function calculate() {
+  let result;
+  try {
+    result = eval(displayValue);
+  } catch (error) {
+    displayError();
+    return;
+  }
+  if (!isNaN(result)) {
+    document.getElementById('display').value = result;
+    displayValue = result.toString();
+  } else {
+    displayError();
+  }
+}
+
+function displayError() {
+  document.getElementById('display').value = 'Error';
+  displayValue = '';
+}
+
+    </script>
+  </body>
+</html>
